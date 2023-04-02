@@ -11,10 +11,14 @@ import {
   CaretBottom
 } from '@element-plus/icons-vue'
 import { ref, reactive } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
 import { menuStore } from '@/store/menu'
+import { userStore } from './store/user';
 
 const route = useRoute()
+const router = useRouter()
+const user = userStore()
+
 const isCollapse = ref(false)
 const handleOpen = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath)
@@ -24,6 +28,11 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 const changeLabel = function () {
   isCollapse.value = !isCollapse.value
+}
+const out = function(){
+  user.user.Authorization = '';
+  console.log(user.user.Authorization);
+  router.push({path:'/login'})
 }
 
 const store: any = menuStore()
@@ -39,6 +48,7 @@ const address = computed(() => {
     address2: address2,
     path: route.path
   }
+  // console.log(c)
   return c
 })
 </script>
@@ -106,71 +116,75 @@ const address = computed(() => {
           </el-sub-menu>
         </el-menu>
       </div>
-      <div class="box_top"  v-if="$route.path !== '/login' && $route.path !== '/register'">
-        <div class="top">
-          <el-radio-group v-model="isCollapse">
-            <div @click="changeLabel" :class="isCollapse ? 'top_btn' : ''">
-              <svg
-                data-v-38e027bb=""
-                t="1492500959545"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="1691"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                width="20"
-                height="20"
-                class="pic"
-              >
-                <path
-                  data-v-38e027bb=""
-                  d="M966.8023 568.849776 57.196677 568.849776c-31.397081 0-56.850799-25.452695-56.850799-56.850799l0 0c0-31.397081 25.452695-56.849776 56.850799-56.849776l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.849776l0 0C1023.653099 543.397081 998.200404 568.849776 966.8023 568.849776z"
-                  p-id="1692"
-                ></path>
-                <path
-                  data-v-38e027bb=""
-                  d="M966.8023 881.527125 57.196677 881.527125c-31.397081 0-56.850799-25.452695-56.850799-56.849776l0 0c0-31.397081 25.452695-56.849776 56.850799-56.849776l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.849776l0 0C1023.653099 856.07443 998.200404 881.527125 966.8023 881.527125z"
-                  p-id="1693"
-                ></path>
-                <path
-                  data-v-38e027bb=""
-                  d="M966.8023 256.17345 57.196677 256.17345c-31.397081 0-56.850799-25.452695-56.850799-56.849776l0 0c0-31.397081 25.452695-56.850799 56.850799-56.850799l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.850799l0 0C1023.653099 230.720755 998.200404 256.17345 966.8023 256.17345z"
-                  p-id="1694"
-                ></path>
-              </svg>
-            </div>
-          </el-radio-group>
-          <div class="nav">
-            <el-breadcrumb separator="/">
-              <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-              <el-breadcrumb-item :to="address.path" v-if="address === ''">{{
-                address.address1
-              }}</el-breadcrumb-item>
-              <el-breadcrumb-item v-if="address === ''">{{ address.address2 }}</el-breadcrumb-item>
-            </el-breadcrumb>
-          </div>
-        </div>
 
-        <div class="out">
-          <div>
-            <el-icon><User /></el-icon>
-          </div>
-          <div class="out_btn">
-            <el-dropdown trigger="click">
-              <span class="el-dropdown-link">
-                <el-icon><CaretBottom /></el-icon>
-              </span>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item>首页</el-dropdown-item>
-                  <el-dropdown-item>退出</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
+      <div>
+        <div v-if="$route.path !== '/login' && $route.path !== '/register'">
+          <div :class="isCollapse ? 'top_box' : 'box_top'">
+            <div class="top">
+              <el-radio-group v-model="isCollapse">
+                <div @click="changeLabel" :class="isCollapse ? 'top_btn' : ''">
+                  <svg
+                    data-v-38e027bb=""
+                    t="1492500959545"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="1691"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="20"
+                    height="20"
+                    class="pic"
+                  >
+                    <path
+                      data-v-38e027bb=""
+                      d="M966.8023 568.849776 57.196677 568.849776c-31.397081 0-56.850799-25.452695-56.850799-56.850799l0 0c0-31.397081 25.452695-56.849776 56.850799-56.849776l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.849776l0 0C1023.653099 543.397081 998.200404 568.849776 966.8023 568.849776z"
+                      p-id="1692"
+                    ></path>
+                    <path
+                      data-v-38e027bb=""
+                      d="M966.8023 881.527125 57.196677 881.527125c-31.397081 0-56.850799-25.452695-56.850799-56.849776l0 0c0-31.397081 25.452695-56.849776 56.850799-56.849776l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.849776l0 0C1023.653099 856.07443 998.200404 881.527125 966.8023 881.527125z"
+                      p-id="1693"
+                    ></path>
+                    <path
+                      data-v-38e027bb=""
+                      d="M966.8023 256.17345 57.196677 256.17345c-31.397081 0-56.850799-25.452695-56.850799-56.849776l0 0c0-31.397081 25.452695-56.850799 56.850799-56.850799l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.850799l0 0C1023.653099 230.720755 998.200404 256.17345 966.8023 256.17345z"
+                      p-id="1694"
+                    ></path>
+                  </svg>
+                </div>
+              </el-radio-group>
+              <div class="nav">
+                <el-breadcrumb separator="/">
+                  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                  <el-breadcrumb-item :to="address.path" v-if="address.address1 !== undefined">{{
+                    address.address1
+                  }}</el-breadcrumb-item>
+                  <el-breadcrumb-item v-if="address.address1 !== undefined">{{
+                    address.address2
+                  }}</el-breadcrumb-item>
+                </el-breadcrumb>
+              </div>
+            </div>
+            <div class="out">
+              <div>
+                <el-icon><User /></el-icon>
+              </div>
+              <div class="out_btn">
+                <el-dropdown trigger="click">
+                  <span class="el-dropdown-link">
+                    <el-icon><CaretBottom /></el-icon>
+                  </span>
+                  <template #dropdown>
+                    <el-dropdown-menu>
+                      <el-dropdown-item>首页</el-dropdown-item>
+                      <el-dropdown-item @click="out">退出</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </template>
+                </el-dropdown>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
         <router-view></router-view>
       </div>
     </div>
@@ -187,6 +201,7 @@ const address = computed(() => {
   color: #bfcbd9;
   .box_left {
     // background-color: #304156;
+    position: fixed;
     .el-menu-vertical-demo {
       background-color: #304156;
       color: #bfcbd9;
@@ -214,15 +229,16 @@ const address = computed(() => {
       }
     }
     .el-menu-vertical-demo:not(.el-menu--collapse) {
-      width: 200px;
+      width: 180px;
       min-height: 400px;
     }
   }
-  .box_top {
+  .top_box {
     line-height: 50px;
     height: 50px;
-    width: 100%;
+    width: 90%;
     padding: 5px;
+    margin-left: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -236,16 +252,51 @@ const address = computed(() => {
       .top_btn {
         display: inherit;
         transform: rotate(90deg);
-        transition: 0.5s;
+        transition: 0.1s;
+        padding-right: 20px;
       }
     }
     .nav {
       margin-left: 10px;
     }
-    .out{
+    .out {
       display: flex;
       align-items: center;
-      .out_btn{
+      .out_btn {
+        padding-top: 35px;
+      }
+    }
+  }
+  .box_top {
+    line-height: 50px;
+    height: 50px;
+    width: 90%;
+    padding: 5px;
+    margin-left: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e6e6e6;
+    .top {
+      display: flex;
+      align-items: center;
+    }
+    .el-radio-group {
+      padding-top: 20px;
+      .top_btn {
+        display: inherit;
+        transform: rotate(90deg);
+        transition: 0.1s;
+        padding-right: 20px;
+      }
+    }
+    .nav {
+      margin-left: 10px;
+    }
+    .out {
+      display: flex;
+      align-items: center;
+      .out_btn {
         padding-top: 35px;
       }
     }

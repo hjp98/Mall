@@ -46,6 +46,8 @@ const login = (formRef: FormInstance | undefined) => {
   formRef.validate((valid) => {
     if (valid) {
       console.log('submit!');
+      // store.login(admin);
+      store.tokenCreate();
       router.push({path:'/'});
     } else {
       console.log('error submit!')
@@ -130,7 +132,7 @@ const login = (formRef: FormInstance | undefined) => {
   height: 400px;
   background-color: #ffffff;
   position: fixed;
-  top: 25%;
+  top: 15%;
   left: 40%;
   // padding: 20px;
   border: 1px solid #ebeef5;

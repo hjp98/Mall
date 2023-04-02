@@ -13,8 +13,8 @@ const pathSrc = path.resolve(__dirname, 'src')
 export default defineConfig({
   resolve: {
     alias: {
-      '@': pathSrc,
-    },
+      '@': pathSrc
+    }
   },
   plugins: [
     Vue(),
@@ -31,11 +31,11 @@ export default defineConfig({
         // Auto import icon components
         // 自动导入图标组件
         IconsResolver({
-          prefix: 'Icon',
-        }),
+          prefix: 'Icon'
+        })
       ],
 
-      dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
+      dts: path.resolve(pathSrc, 'auto-imports.d.ts')
     }),
 
     Components({
@@ -43,20 +43,30 @@ export default defineConfig({
         // Auto register icon components
         // 自动注册图标组件
         IconsResolver({
-          enabledCollections: ['ep'],
+          enabledCollections: ['ep']
         }),
         // Auto register Element Plus components
         // 自动导入 Element Plus 组件
-        ElementPlusResolver(),
+        ElementPlusResolver()
       ],
 
-      dts: path.resolve(pathSrc, 'components.d.ts'),
+      dts: path.resolve(pathSrc, 'components.d.ts')
     }),
 
     Icons({
-      autoInstall: true,
+      autoInstall: true
     }),
-
-    Inspect(),
+    Inspect()
   ],
+  server: {
+    proxy: {
+      // 本地开发环境通过代理实现跨域，生产环境使用 nginx 转发
+      // 正则表达式写法
+      '^/api': {
+        target: 'https://admin-api.macrozheng.com/', // 后端服务实际地址
+        changeOrigin: true, //开启代理
+        rewrite: (path: any) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })

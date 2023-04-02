@@ -147,7 +147,7 @@ const login = function () {}
   height: 400px;
   background-color: #ffffff;
   position: fixed;
-  top: 25%;
+  top: 15%;
   left: 40%;
   // padding: 20px;
   border: 1px solid #ebeef5;
