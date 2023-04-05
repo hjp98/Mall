@@ -6,6 +6,12 @@ import { userStore } from '@/store/user'
 
 // const apiurl = import.meta.env.VITE_BASE_API; //不同环境下获取的api的地址
 
+declare module 'axios' {
+  interface AxiosInstance {
+    (config: AxiosRequestConfig): Promise<any>
+  }
+}
+
 //2.创建axios 实例
 const http = axios.create({
   //3.配置

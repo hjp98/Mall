@@ -1,16 +1,6 @@
 <script setup lang="ts">
 import * as echarts from 'echarts'
 import { ref, onMounted } from 'vue'
-// import { GridComponent } from 'echarts/components'
-// import { LineChart } from 'echarts/charts'
-// import { UniversalTransition } from 'echarts/features'
-// import { CanvasRenderer } from 'echarts/renderers'
-// import type { GridComponentOption } from 'echarts/components'
-// import type { LineSeriesOption } from 'echarts/charts'
-
-// echarts.use([GridComponent, LineChart, CanvasRenderer, UniversalTransition])
-
-// type EChartsOption = echarts.ComposeOption<GridComponentOption | LineSeriesOption>
 
 const main = ref() //使用ref创建虚拟DOM引用，使用时用main.value
 let echart = echarts
@@ -28,11 +18,27 @@ const init = function () {
   //配置图表的数据
   let option = {
     legend: {},
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'line'
+      }
+    },
+    grid: {
+      show: 'true'
+    },
     xAxis: [
       {
         type: 'category',
+        axisLabel: {
+          formatter: '{value}'
+        },
         axisTick: {
           alignWithLabel: true
+        },
+        axisLine: {
+          onZero: true,
+          // onZeroyAxisIndex: 0
         },
         data: ['2023-3-1', '2023-3-2', '2023-3-3', '2023-3-4', '2023-3-5', '2023-3-6', '2023-3-7']
       }
@@ -46,7 +52,10 @@ const init = function () {
         position: 'right',
         axisLabel: {
           formatter: '{value}'
-        }
+        },
+        axisLine: {
+          show: true
+        },
       },
       {
         type: 'value',
@@ -56,6 +65,9 @@ const init = function () {
         position: 'left',
         axisLabel: {
           formatter: '{value}'
+        },
+        axisLine: {
+          show: true
         }
       }
     ],
@@ -65,7 +77,9 @@ const init = function () {
         type: 'line',
         yAxisIndex: 0,
         data: [2230, 3623, 6423, 8492, 6293, 2293, 6293],
-        areaStyle: {}
+        areaStyle: {
+          color: '#5cc0e3'
+        }
       },
       {
         name: '订单数量',
@@ -73,7 +87,9 @@ const init = function () {
         smooth: true,
         yAxisIndex: 1,
         data: [20, 33, 50, 80, 60, 20, 60],
-        areaStyle: {}
+        areaStyle: {
+          color: '#5ee1c6'
+        }
       }
     ]
   }
@@ -254,7 +270,7 @@ const init = function () {
   // width: 80%;
   margin-top: 40px;
   margin-left: 235px;
-  // margin-right: 120px;
+  margin-right: 100px;
   padding: 20px;
   font-size: 16px;
   color: #606266;

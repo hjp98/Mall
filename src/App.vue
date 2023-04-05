@@ -11,9 +11,9 @@ import {
   CaretBottom
 } from '@element-plus/icons-vue'
 import { ref, reactive } from 'vue'
-import { useRoute,useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { menuStore } from '@/store/menu'
-import { userStore } from './store/user';
+import { userStore } from './store/user'
 
 const route = useRoute()
 const router = useRouter()
@@ -21,18 +21,19 @@ const user = userStore()
 
 const isCollapse = ref(false)
 const handleOpen = (key: string, keyPath: string[]) => {
-  // console.log(key, keyPath)
+  console.log(key, keyPath)
 }
 const handleClose = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath)
 }
+
 const changeLabel = function () {
   isCollapse.value = !isCollapse.value
 }
-const out = function(){
-  user.user.Authorization = '';
-  console.log(user.user.Authorization);
-  router.push({path:'/login'})
+const out = function () {
+  user.user.Authorization = ''
+  console.log(user.user.Authorization)
+  router.push({ path: '/login' })
 }
 
 const store: any = menuStore()
@@ -48,9 +49,18 @@ const address = computed(() => {
     address2: address2,
     path: route.path
   }
-  // console.log(c)
+  console.log(c.path)
   return c
 })
+
+// let activeIndex = ref()
+// watch(route, () => {
+//   handleSelect(activeIndex.value)
+// })
+
+const handleSelect = function (index: any) {
+  // activeIndex.value = index
+}
 </script>
 
 <template>
@@ -58,22 +68,31 @@ const address = computed(() => {
     <div class="box">
       <div class="box_left" v-if="$route.path !== '/login' && $route.path !== '/register'">
         <el-menu
-          default-active="2"
+          :default-active="address.path"
+          :router="true"
           class="el-menu-vertical-demo"
           :collapse="isCollapse"
           @open="handleOpen"
           @close="handleClose"
+          @select="handleSelect"
         >
-          <el-menu-item index="1" id="index" @click="$router.push({ path: '/' })">
+          <el-menu-item
+            index="/"
+            id="index"
+            @click="$router.push({ path: '/' })"
+            :style="address.path === '/' ? 'color: #409eff;' : ''"
+          >
             <el-icon><HomeFilled /></el-icon>
             <template #title>首页</template>
           </el-menu-item>
-          <el-sub-menu index="2">
+          <el-sub-menu index="/commodity">
             <template #title>
               <el-icon><ShoppingBag /></el-icon>
               <span>商品</span>
             </template>
-            <el-menu-item index="2-1" @click="$router.push({ path: '/commodity/goods' })"
+            <el-menu-item
+              index="/commodity/goods"
+              :style="address.path === '/commodity/goods' ? 'color: #409eff;' : ''"
               >商品列表</el-menu-item
             >
             <el-menu-item index="2-2">添加商品</el-menu-item>
@@ -117,71 +136,72 @@ const address = computed(() => {
         </el-menu>
       </div>
 
-      <div>
-        <div v-if="$route.path !== '/login' && $route.path !== '/register'">
-          <div :class="isCollapse ? 'top_box' : 'box_top'">
-            <div class="top">
-              <el-radio-group v-model="isCollapse">
-                <div @click="changeLabel" :class="isCollapse ? 'top_btn' : ''">
-                  <svg
+      <div style="width: 100%">
+        <div
+          :class="isCollapse ? 'top_box' : 'box_top'"
+          v-if="$route.path !== '/login' && $route.path !== '/register'"
+        >
+          <div class="top">
+            <el-radio-group v-model="isCollapse">
+              <div @click="changeLabel" :class="isCollapse ? 'top_btn' : ''">
+                <svg
+                  data-v-38e027bb=""
+                  t="1492500959545"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="1691"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="20"
+                  height="20"
+                  class="pic"
+                >
+                  <path
                     data-v-38e027bb=""
-                    t="1492500959545"
-                    viewBox="0 0 1024 1024"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    p-id="1691"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    width="20"
-                    height="20"
-                    class="pic"
-                  >
-                    <path
-                      data-v-38e027bb=""
-                      d="M966.8023 568.849776 57.196677 568.849776c-31.397081 0-56.850799-25.452695-56.850799-56.850799l0 0c0-31.397081 25.452695-56.849776 56.850799-56.849776l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.849776l0 0C1023.653099 543.397081 998.200404 568.849776 966.8023 568.849776z"
-                      p-id="1692"
-                    ></path>
-                    <path
-                      data-v-38e027bb=""
-                      d="M966.8023 881.527125 57.196677 881.527125c-31.397081 0-56.850799-25.452695-56.850799-56.849776l0 0c0-31.397081 25.452695-56.849776 56.850799-56.849776l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.849776l0 0C1023.653099 856.07443 998.200404 881.527125 966.8023 881.527125z"
-                      p-id="1693"
-                    ></path>
-                    <path
-                      data-v-38e027bb=""
-                      d="M966.8023 256.17345 57.196677 256.17345c-31.397081 0-56.850799-25.452695-56.850799-56.849776l0 0c0-31.397081 25.452695-56.850799 56.850799-56.850799l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.850799l0 0C1023.653099 230.720755 998.200404 256.17345 966.8023 256.17345z"
-                      p-id="1694"
-                    ></path>
-                  </svg>
-                </div>
-              </el-radio-group>
-              <div class="nav">
-                <el-breadcrumb separator="/">
-                  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                  <el-breadcrumb-item :to="address.path" v-if="address.address1 !== undefined">{{
-                    address.address1
-                  }}</el-breadcrumb-item>
-                  <el-breadcrumb-item v-if="address.address1 !== undefined">{{
-                    address.address2
-                  }}</el-breadcrumb-item>
-                </el-breadcrumb>
+                    d="M966.8023 568.849776 57.196677 568.849776c-31.397081 0-56.850799-25.452695-56.850799-56.850799l0 0c0-31.397081 25.452695-56.849776 56.850799-56.849776l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.849776l0 0C1023.653099 543.397081 998.200404 568.849776 966.8023 568.849776z"
+                    p-id="1692"
+                  ></path>
+                  <path
+                    data-v-38e027bb=""
+                    d="M966.8023 881.527125 57.196677 881.527125c-31.397081 0-56.850799-25.452695-56.850799-56.849776l0 0c0-31.397081 25.452695-56.849776 56.850799-56.849776l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.849776l0 0C1023.653099 856.07443 998.200404 881.527125 966.8023 881.527125z"
+                    p-id="1693"
+                  ></path>
+                  <path
+                    data-v-38e027bb=""
+                    d="M966.8023 256.17345 57.196677 256.17345c-31.397081 0-56.850799-25.452695-56.850799-56.849776l0 0c0-31.397081 25.452695-56.850799 56.850799-56.850799l909.605623 0c31.397081 0 56.849776 25.452695 56.849776 56.850799l0 0C1023.653099 230.720755 998.200404 256.17345 966.8023 256.17345z"
+                    p-id="1694"
+                  ></path>
+                </svg>
               </div>
+            </el-radio-group>
+            <div class="nav">
+              <el-breadcrumb separator="/">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="address.path" v-if="address.address1 !== undefined">{{
+                  address.address1
+                }}</el-breadcrumb-item>
+                <el-breadcrumb-item v-if="address.address1 !== undefined">{{
+                  address.address2
+                }}</el-breadcrumb-item>
+              </el-breadcrumb>
             </div>
-            <div class="out">
-              <div>
-                <el-icon><User /></el-icon>
-              </div>
-              <div class="out_btn">
-                <el-dropdown trigger="click">
-                  <span class="el-dropdown-link">
-                    <el-icon><CaretBottom /></el-icon>
-                  </span>
-                  <template #dropdown>
-                    <el-dropdown-menu>
-                      <el-dropdown-item>首页</el-dropdown-item>
-                      <el-dropdown-item @click="out">退出</el-dropdown-item>
-                    </el-dropdown-menu>
-                  </template>
-                </el-dropdown>
-              </div>
+          </div>
+          <div class="out">
+            <div>
+              <el-icon><User /></el-icon>
+            </div>
+            <div class="out_btn">
+              <el-dropdown trigger="click">
+                <span class="el-dropdown-link">
+                  <el-icon><CaretBottom /></el-icon>
+                </span>
+                <template #dropdown>
+                  <el-dropdown-menu>
+                    <el-dropdown-item>首页</el-dropdown-item>
+                    <el-dropdown-item @click="out">退出</el-dropdown-item>
+                  </el-dropdown-menu>
+                </template>
+              </el-dropdown>
             </div>
           </div>
         </div>
@@ -236,7 +256,7 @@ const address = computed(() => {
   .top_box {
     line-height: 50px;
     height: 50px;
-    width: 90%;
+    // width: 100%;
     padding: 5px;
     margin-left: 70px;
     display: flex;
@@ -270,7 +290,7 @@ const address = computed(() => {
   .box_top {
     line-height: 50px;
     height: 50px;
-    width: 90%;
+    // width: 100%;
     padding: 5px;
     margin-left: 190px;
     display: flex;
