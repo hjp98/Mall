@@ -86,12 +86,10 @@ getBrand({ pageNum: 1, pageSize: 100 }).then((res) => {
   arr.map((item: any) => {
     brandList.value.push({ label: item.name, value: item.id })
   })
-  // console.log(brandList);
 })
 //获取商品种类选择
 getOptions('').then((res) => {
   let list = res.data.data
-  // options = []
   for (let i = 0; i < list.length; i++) {
     let children = []
     if (list[i].children != null && list[i].children.length > 0) {
@@ -101,7 +99,6 @@ getOptions('').then((res) => {
     }
     options.value.push({ label: list[i].name, value: list[i].id, children: children })
   }
-  // options.value = res.data.data;
 })
 const handleChange = function () {}
 const reset = function () {
@@ -415,16 +412,6 @@ watch(pageInfo, () => {
                 <el-input v-model="scope.row.skuCode"></el-input>
               </template>
             </el-table-column>
-            <!-- <el-table-column label="颜色" width="180">
-              <template #default="scope">
-                <div>{{ filterStr(scope.row, scope.row.index) }}</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="容量">
-              <template #default="scope">
-                <div>{{ filterStr(scope.row,scope) }}</div>
-              </template>
-            </el-table-column> -->
             <el-table-column
               :label="item.name"
               v-for="(item, index) in typeList"

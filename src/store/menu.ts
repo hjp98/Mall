@@ -6,7 +6,8 @@ export const menuStore = defineStore(
   () => {
     const menu = reactive({
       commodity: '商品',
-      goods: '商品列表'
+      goods: '商品列表',
+      add: '添加商品'
     })
     return { menu }
   },

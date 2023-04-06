@@ -38,17 +38,20 @@ const validatePass = (rule: any, value: any, callback: any) => {
 
 const rules = reactive<FormRules>({
   id: [{ validator: validateId, trigger: 'blur' }],
-  checkPass: [{ validator: validatePass, trigger: 'blur' }]
+  checkPass: [
+    { validator: validatePass, trigger: 'blur' },
+    { min: 3, message: '密码不能少于三位', trigger: 'blur' }
+  ]
 })
 
 const login = (formRef: FormInstance | undefined) => {
   if (!formRef) return
-  formRef.validate((valid) => {
+  formRef.validate((valid:any) => {
     if (valid) {
-      console.log('submit!');
+      console.log('submit!')
       // store.login(admin);
-      store.tokenCreate();
-      router.push({path:'/'});
+      store.tokenCreate()
+      router.push({ path: '/' })
     } else {
       console.log('error submit!')
       return false

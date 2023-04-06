@@ -38,3 +38,33 @@ export function type(params: any) {
     params: params
   })
 }
+//获取添加商品页中填写商品属性的商品类型
+export function attrType(params: any) {
+  return http({
+    url: 'productAttribute/category/list',
+    method: 'get',
+    params: params
+  })
+}
+
+//获取添加商品页中填写商品属性的商品规格与商品参数
+export function attrList(val: any, params: any) {
+  return http({
+    url: 'productAttribute/list/'+ val,
+    method: 'get',
+    params: params
+  })
+}
+//获取添加商品页中商品关联
+export function getRelevance() {
+  return http({
+    url: 'subject/listAll',
+    method: 'get'
+  })
+}
+export function getRelevanceList() {
+  return http({
+    url: 'prefrenceArea/listAll',
+    method: 'get'
+  })
+}

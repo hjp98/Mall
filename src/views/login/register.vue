@@ -2,9 +2,8 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { reactive } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { userStore } from '@/store/user';
-import { useRouter } from 'vue-router';
-
+import { userStore } from '@/store/user'
+import { useRouter } from 'vue-router'
 
 const ruleForm = reactive({
   name: 'admin',
@@ -12,8 +11,8 @@ const ruleForm = reactive({
   checkPass: ''
 })
 const ruleFormRef = ref<FormInstance>()
-const store = userStore();
-const router = useRouter();
+const store = userStore()
+const router = useRouter()
 
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value === '') {
@@ -27,7 +26,7 @@ const validatePass = (rule: any, value: any, callback: any) => {
   }
 }
 const validatePass2 = (rule: any, value: any, callback: any) => {
-  console.log(value);
+  console.log(value)
   if (value === '') {
     callback(new Error('请再次输入密码'))
   } else if (value !== ruleForm.pass) {
@@ -38,17 +37,20 @@ const validatePass2 = (rule: any, value: any, callback: any) => {
 }
 
 const rules = reactive<FormRules>({
-  pass: [{ validator: validatePass, trigger: 'blur' }],
-  checkPass: [{ validator: validatePass2, trigger: 'blur' }],
+  pass: [
+    { validator: validatePass, trigger: 'blur' },
+    { min: 3, message: '密码不能少于三位', trigger: 'blur' }
+  ],
+  checkPass: [{ validator: validatePass2, trigger: 'blur' }]
 })
 
 const submitForm = (ruleFormRef: FormInstance | undefined) => {
   if (!ruleFormRef) return
-  ruleFormRef.validate((valid) => {
+  ruleFormRef.validate((valid: any) => {
     if (valid) {
       console.log('submit!')
-      store.login(ruleForm);
-      router.push({path:'/'});
+      store.login(ruleForm)
+      router.push({ path: '/' })
     } else {
       console.log('error submit!')
       return false
