@@ -4,6 +4,7 @@ import Information from './components/Information.vue'
 import Market from './components/market.vue'
 import Attribute from './components/attribute.vue'
 import Relevance from './components/relevance.vue'
+// import { ElMessage, ElMessageBox } from 'element-plus'
 
 let active = ref(0) //控制步骤条
 
