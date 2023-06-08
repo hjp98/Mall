@@ -17,7 +17,7 @@ export const userStore = defineStore(
     }
     const tokenCreate = function () {
       let guid =
-        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE2ODA0MDcwOTYxOTIsImV4cCI6MTY4MTAxMTg5Nn0.ilFXDdKXGpstCfyqLys9IJevtUFr6O_bSbATjJnDtinNB7DvuXoF7mokMwEBIMuEj-vmZWQD_PyEa57q0u9wuQ'
+        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE2ODYyMDk3MzYxNzYsImV4cCI6MTY4NjgxNDUzNn0.1QOTVrrKssMWjfRLZH6nvbFvwmBJ9Vb9oIqVJjp3pGasEutcdAPwJqn8CO6gZF-6edCo6NJzdTEA_Efw0gullQ'
       // for (let i = 0; i <= 32; i++) {
       //   const n = Math.floor(Math.random() * 16.0).toString(16);
       //   guid += n;

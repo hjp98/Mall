@@ -100,7 +100,11 @@ const handleSelect = function (index: any) {
               :style="address.path === '/commodity/add' ? 'color: #409eff;' : ''"
               >添加商品</el-menu-item
             >
-            <el-menu-item index="2-3">商品分类</el-menu-item>
+            <el-menu-item
+              index="/commodity/goodsType"
+              :style="address.path === '/commodity/goodsType' ? 'color: #409eff;' : ''"
+              >商品分类</el-menu-item
+            >
             <el-menu-item index="2-4">商品类型</el-menu-item>
             <el-menu-item index="2-5">品牌管理</el-menu-item>
           </el-sub-menu>

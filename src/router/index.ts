@@ -29,12 +29,22 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'goods',
         name: 'goods',
-        component: () => import(/* webpackChunkName: "about" */ '../views/commodity/index.vue')
+        component: () => import('../views/commodity/index.vue')
       },
       {
         path: 'add',
         name: 'add',
-        component: () => import(/* webpackChunkName: "about" */ '../views/commodity/add.vue')
+        component: () => import('../views/commodity/add.vue')
+      },
+      {
+        path: 'goodsType',
+        name: 'goodsType',
+        component: () => import('../views/commodity/goodsType/index.vue')
+      },
+      {
+        path: 'addType',
+        name: 'addType',
+        component: () => import('../views/commodity/goodsType/addType.vue')
       }
     ]
   }

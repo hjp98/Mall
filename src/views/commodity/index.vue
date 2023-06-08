@@ -64,7 +64,7 @@ let list = ref([])
 let sellList: any = ref([])
 // let spData = ref([])
 let typeList: any = ref([])
-let checkArr:any = ref([])  //保存选中数据
+let checkArr: any = ref([]) //保存选中数据
 const pageInfo = reactive({
   pageSize: 5,
   pageNum: 1
@@ -82,6 +82,7 @@ function getData() {
 getData()
 //获取品牌数组
 getBrand({ pageNum: 1, pageSize: 100 }).then((res) => {
+  console.log(res.data);
   let arr = res.data.data.list
   arr.map((item: any) => {
     brandList.value.push({ label: item.name, value: item.id })
@@ -169,16 +170,17 @@ const batchConfirm = function () {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'
-  }).then(() => {
+  })
+    .then(() => {
       ElMessage({
         type: 'success',
-        message: 'Delete completed',
+        message: 'Delete completed'
       })
     })
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: 'Delete canceled',
+        message: 'Delete canceled'
       })
     })
 }
